@@ -1,0 +1,46 @@
+{% extends 'exports/base.html' %}
+{% block content %}
+<div class="my-4">
+  <h2 class="text-center mb-4">Mango Export List</h2>
+
+  <form method="GET" class="d-flex mb-4 justify-content-center">
+    <input type="text" name="search" class="form-control me-2 w-25" placeholder="Search by Order ID">
+    <button type="submit" class="btn btn-success">Search</button>
+  </form>
+
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead class="table-success">
+        <tr>
+          <th scope="col">Order ID</th>
+          <th scope="col">Variety</th>
+          <th scope="col">Description</th>
+          <th scope="col">Price (BDT)</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for mango in mangoes %}
+        <tr>
+          <td>{{ mango.order_id }}</td>
+          <td>{{ mango.variety }}</td>
+          <td>{{ mango.description }}</td>
+          <td>{{ mango.price }}</td>
+          <td>
+            <a href="{% url 'mango_update' mango.order_id %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'mango_delete' mango.order_id %}" class="btn btn-danger btn-sm">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="5" class="text-center">No mango exports found.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center mt-3">
+    <a href="{% url 'mango_create' %}" class="btn btn-primary">Add New Mango</a>
+  </div>
+</div>
+{% endblock %}

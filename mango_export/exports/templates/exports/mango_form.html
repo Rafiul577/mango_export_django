@@ -1,0 +1,38 @@
+{% extends 'exports/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card p-4">
+      <h2 class="card-title text-center mb-4">Mango Form</h2>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          {{ form.variety.label_tag }}
+          {{ form.variety }}
+          {% if form.variety.errors %}
+            <div class="text-danger">{{ form.variety.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          {{ form.description.label_tag }}
+          {{ form.description }}
+          {% if form.description.errors %}
+            <div class="text-danger">{{ form.description.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="mb-3">
+          {{ form.price.label_tag }}
+          {{ form.price }}
+          {% if form.price.errors %}
+            <div class="text-danger">{{ form.price.errors }}</div>
+          {% endif %}
+        </div>
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-success">Save</button>
+          <a href="{% url 'mango_list' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
